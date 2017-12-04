@@ -29,7 +29,7 @@ shinyUI(navbarPage('UFO Analysis',
                                 ),
                                 
                                 mainPanel(
-                                  #plotlyOutput("map")
+                                  plotlyOutput("map")
                                 )
                               )
                     ),
