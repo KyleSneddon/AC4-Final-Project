@@ -8,8 +8,8 @@ library("lubridate")
 
 # Construct shiny server
 shinyServer(function(input, output) {
-  ufo.data <- read.csv(file="data/ufo.csv", header=TRUE) %>% mutate(Country = "us")
-  #ufo.data$Years
+  ufo.data <- read.csv(file="data/ufo.csv", header=TRUE) %>% filter(Country == "us")
+  
   ufo.dataset <- reactive({
     selected.df <- ufo.data %>% filter(Shape == input$shape) #%>% filter(Date == input$years) 
     return(selected.df)
