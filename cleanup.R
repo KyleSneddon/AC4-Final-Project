@@ -9,12 +9,6 @@ data <- read.csv("~/Desktop/info201/AC4-Final-Project/data/ufo.csv") %>%
 #Change Unkown column to Duration.in.seconds
 colnames(data)[colnames(data)=="Unknown"] <- "Duration.in.seconds"
 
-#mutate by columns
-data$Description <- str_to_title(data$Description)
-data$City <- str_to_title(data$City)
-data$State <- str_to_upper(data$State)
-data$Shape <- str_to_title(data$Shape)
-
 #substring all the unnessasary words
 data$Description <- gsub('&#44', '', data$Description)  
 data$Duration <- gsub('&#44', '', data$Duration)
@@ -44,6 +38,16 @@ data$Description <- gsub('&#186;','', data$Description)
 data$Description <- gsub('&#176;','', data$Description)
 data$Description <- gsub('&#8216;','', data$Description)
 
+
+#mutate by columns
+data$Description <- str_to_title(data$Description)
+data$City <- str_to_title(data$City)
+data$State <- str_to_upper(data$State)
+data$Shape <- str_to_title(data$Shape)
+
+
 #writes csv
 write.csv(data,'data/cleandata.csv')
+
+
 
