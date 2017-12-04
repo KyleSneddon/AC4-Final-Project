@@ -44,5 +44,6 @@ data$Description <- gsub('&#186;','', data$Description)
 data$Description <- gsub('&#176;','', data$Description)
 data$Description <- gsub('&#8216;','', data$Description)
 
-
+#writes csv
+write.csv(data,'data/cleandata.csv')
 
