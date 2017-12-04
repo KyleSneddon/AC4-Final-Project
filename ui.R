@@ -15,14 +15,26 @@ shinyUI(navbarPage('UFO Analysis',
                    ), 
                    
                    # Create a tab panel for the map page
+                  
+                   
                    tabPanel('Map',
                             
                             # Map page title
-                            titlePanel('Map Page Title')
-                            
+                            titlePanel('Map Page Title'),
                             # Map page information goes here
-                   ),
-                   
+                            sidebarLayout(
+                                sidebarPanel(
+                                    sliderInput("years", "Year:", min = 1960, max = 2017, value = 2000),
+                                    selectInput('shape', 'Shape', choices = ufo.data$Shape, selected = "All")
+                                ),
+                                
+                                mainPanel(
+                                  #plotlyOutput("map")
+                                )
+                              )
+                    ),
+                            
+              
                    # Create a tab panel for the plot page
                    tabPanel('Plot',
                             
