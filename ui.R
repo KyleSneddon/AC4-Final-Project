@@ -25,7 +25,7 @@ shinyUI(navbarPage('UFO Analysis',
                             sidebarLayout(
                                 sidebarPanel(
                                     sliderInput("years", "Year:", min = 1998, max = 2014, value = 2000),
-                                    checkboxInput("select","Show all shapes UFO?",value = TRUE),
+                                    checkboxInput("select","Show all the shapes of UFO?",value = TRUE),
                                     selectInput('shape', 'Shape', choices =ufo.data$Shape, selected = "All")
                                 ),
                                 
