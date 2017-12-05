@@ -24,7 +24,7 @@ shinyUI(navbarPage('UFO Analysis',
                             # Map page information goes here
                             sidebarLayout(
                                 sidebarPanel(
-                                    sliderInput("years", "Year:", min = 1960, max = 2017, value = 2000),
+                                    sliderInput("years", "Year:", min = 1998, max = 2014, value = 2000),
                                     selectInput('shape', 'Shape', choices = ufo.data$Shape, selected = "All")
                                 ),
                                 

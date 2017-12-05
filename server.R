@@ -8,20 +8,32 @@ library("lubridate")
 
 # Construct shiny server
 shinyServer(function(input, output) {
-  ufo.data <- read.csv(file="data/ufo.csv", header=TRUE) %>% filter(Country == "us")
+  ufo.data <- read.csv(file="data/ufo.csv", header=TRUE) %>% filter(Country == "us")%>% mutate(Date = mdy(Date)) %>% mutate(Years = year(Date))
   
   ufo.dataset <- reactive({
-    selected.df <- ufo.data %>% filter(Shape == input$shape) #%>% filter(Date == input$years) 
+    selected.df <- ufo.data %>% filter(Shape == input$shape) %>% filter(Years == input$years) 
     return(selected.df)
   })
   
   output$map <- renderPlotly({
     df <- ufo.dataset()
     
-    p <- plot_geo(df, locationmode = 'USA-states', sizes = c(1, 250)) %>%
+    g <- list(
+      scope = 'usa',
+      projection = list(type = 'albers usa'),
+      showland = TRUE,
+      landcolor = toRGB("gray85"),
+      subunitwidth = 1,
+      countrywidth = 1,
+      subunitcolor = toRGB("white"),
+      countrycolor = toRGB("white")
+    )
+    p <- plot_geo(df, locationmode = 'USA-states', sizes = c(1, 300)) %>%
       add_markers(
-        x = ~Longitude, y = ~Latitute
-      )
+        x = ~Latitute, y = ~Longitude, hoverinfo = "text",
+        text = ~paste(" million")
+      ) %>%
+      layout(title = 'UFO', geo = g)
     
   })
   
