@@ -5,13 +5,11 @@ library('dplyr')
 library('plotly')
 library("lubridate")
 # Read in data and convert to data frame
-
+ufo.data <- read.csv(file="data/ufo.csv", header= TRUE) %>% mutate(Date = mdy(Date)) %>% mutate(Years = year(Date)) #%>% select(City, State,Shape,Duration,Description,Longitude,Latitute,Years)
 # Construct shiny server
 shinyServer(function(input, output) {
-  
-  ufo.data <- read.csv(file="data/ufo.csv", header= TRUE) %>% mutate(Date = mdy(Date)) %>% mutate(Years = year(Date)) #%>% select(City, State,Shape,Duration,Description,Longitude,Latitute,Years)
-  
   ufo.dataset <- reactive({
+    
     if(input$select){
     selected.df <- ufo.data %>% filter(Years == input$years) 
     }else{
@@ -46,3 +44,4 @@ shinyServer(function(input, output) {
   
 
 })
+
