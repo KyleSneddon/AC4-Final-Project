@@ -11,7 +11,11 @@ shinyServer(function(input, output) {
   ufo.data <- read.csv(file="data/ufo.csv", header=TRUE) %>% filter(Country == "us")%>% mutate(Date = mdy(Date)) %>% mutate(Years = year(Date))
   
   ufo.dataset <- reactive({
-    selected.df <- ufo.data %>% filter(Shape == input$shape) %>% filter(Years == input$years) 
+    if(input$select){
+    selected.df <- ufo.data %>% filter(Years == input$years) 
+    }else{
+    selected.df <- ufo.data  %>% filter(Shape == input$shape) %>% filter(Years == input$years) 
+    }
     return(selected.df)
   })
   
@@ -30,15 +34,11 @@ shinyServer(function(input, output) {
     )
     p <- plot_geo(df, locationmode = 'USA-states', sizes = c(1, 300)) %>%
       add_markers(
-        x = ~Latitute, y = ~Longitude, hoverinfo = "text",
-        text = ~paste(" million")
+        x = ~Latitute, y = ~Longitude
       ) %>%
       layout(title = 'UFO', geo = g)
     
   })
   
-  
-  
-  
-  # Stuff goes here
+
 })
