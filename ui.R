@@ -20,17 +20,19 @@ shinyUI(navbarPage('UFO Analysis',
                    tabPanel('Map',
                             
                             # Map page title
-                            titlePanel('Map Page Title'),
+                            titlePanel(  
+                              textOutput("title")
+                              ),
                             # Map page information goes here
                             sidebarLayout(
                                 sidebarPanel(
+                                    selectInput('state', 'State', choices = toupper(state.abb), selected = "WA" ),
                                     sliderInput("years", "Year:", min = 1998, max = 2014, value = 2000),
-                                    checkboxInput("select","Show all the shapes of UFO?",value = TRUE),
-                                    selectInput('shape', 'Shape', choices =ufo.data$Shape, selected = "All")
+                                    uiOutput("myList")
                                 ),
                                 
                                 mainPanel(
-                                  plotlyOutput("map")
+                                  leafletOutput("map")
                                 )
                               )
                     ),
