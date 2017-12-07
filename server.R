@@ -110,6 +110,8 @@ shinyServer(function(input, output) {
              showlegend = F, 
              width=800,
              height=800,
+             plot_bgcolor='rgb(40, 43, 48)',
+             paper_bgcolor='rgb(40, 43, 48)',
              xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
              yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
   })
