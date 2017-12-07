@@ -18,9 +18,6 @@ BlankShape <- function(shape.take){
 ufo.data$Shape<- lapply(ufo.data$Shape, BlankShape)
 ufo.data$Shape <- as.character(ufo.data$Shape)
 
-shape.to.color <- group_by(ufo.data, Shape) %>% summarise(n=n())
-
-
 
 ufo.data$Duration <- as.numeric(ufo.data$Duration)
 DurationClean <- function(duration){
@@ -62,9 +59,9 @@ shinyServer(function(input, output) {
   
   ufo.dataset <- reactive({
     if(input$shape == "all"){
-    selected.df <- ufo.data %>% filter(Years == input$years)%>% filter(State == input$state)
+    selected.df <- ufo.data %>% filter(Years == input$years) %>% filter(State == input$state)
     }else{
-    selected.df <- ufo.data %>% filter(Years == input$years) %>% filter(State == input$state) %>% filter(Shape == input$shape) 
+    selected.df <- ufo.data %>% filter(Years == input$years) %>% filter(Shape == input$shape) %>% filter(State == input$state) 
     }
     return(selected.df)
   })
