@@ -2,16 +2,14 @@
 library("shiny")
 library("plotly")
 library("shinythemes")
+
 # Construct shiny UI page
 shinyUI(navbarPage(theme = shinytheme("slate"),'UFO Analysis',
                    
                    # Create a tab panel for the about page
                    tabPanel('About',
                             
-                            # About page title
-                            titlePanel('About Page Title')
-                            
-                            # About page information goes here 
+                            includeMarkdown("about.md")
                    ), 
                    
                    # Create a tab panel for the map page
@@ -65,9 +63,6 @@ shinyUI(navbarPage(theme = shinytheme("slate"),'UFO Analysis',
                    # Create a tab panel for the conclusion page
                    tabPanel('Conclusion',
                             
-                            # Map page title
-                            titlePanel('Conclusion Page Title')
-                            
-                            # Conclusion page information goes here
+                            includeMarkdown("conclusion.md")
                    )
 ))
