@@ -1,4 +1,5 @@
-# UFO Observations
+<img src="UFO.png" width="600">
+
 ### Eric Wong, Keegan Na, Kyle Sneddon, Yicheng Duan
 ---
 
@@ -44,6 +45,3 @@ We created a map of the United States. On it, it displays all the different UFOs
 #### Donut Chart
 
 We also created a donut chart. Our aim with this type of visualization was to allow the users to quickly and beautifully see different UFO sighting percentages based on the chosen filter. We provide three different filters to choose from. Filters include, state, shape and year.
-
-
-![Drag Racing](Rplot.png)
