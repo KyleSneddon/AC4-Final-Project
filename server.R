@@ -92,7 +92,7 @@ shinyServer(function(input, output) {
   })
   
   # Generates custom page title depending on user input
-  output$title <- renderText(paste("Year",input$years,state.name[grep(input$state, state.abb)],"UFO MAP"))
+  output$title <- renderText(paste("UFO Reports of", input$years, "in", state.name[grep(input$state, state.abb)]))
   
   # Generates a pie chart
   output$pie <- renderPlotly({
@@ -125,6 +125,9 @@ shinyServer(function(input, output) {
              xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
              yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
   })
+  
+  # Generates custom page title depending on user input
+  output$title2 <- renderText(paste("Proportion of UFO Reports by", input$options))
 })
   
   

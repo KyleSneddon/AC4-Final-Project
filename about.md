@@ -1,6 +1,6 @@
-<img src="UFO.png" width="600">
+<img src="data/UFO.png" width="600">
 
-### Eric Wong, Keegan Na, Kyle Sneddon, Yicheng Duan
+### By Eric Wong, Keegan Na, Kyle Sneddon, & Yicheng Duan
 ---
 
 ## The Data
@@ -33,7 +33,7 @@ Some questions we believe could be answered include:
 
 ## Data Visualization
 
-we created different data visualizations. Through visually displaying our answers, we hope this could better help answer the questions listed above.
+We created different data visualizations. Through visually displaying our answers, we hope this could better help answer the questions listed above.
 
 
 

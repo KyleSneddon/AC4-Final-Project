@@ -3,7 +3,7 @@
 
 ## Major Trends
 
-We were able to uncover some major trends through the visualizations we created. Trends include:
+We were able to uncover some major trends through the visualizations we created, which include:
 
 -**California** came in first as the state with the most UFO sightings.
 
@@ -17,6 +17,6 @@ We were able to uncover some major trends through the visualizations we created.
 
 ## Summary
 
-Overall, we were able to see that UFO sightings are increasing in numbers as the years progress. Sightings have grown by **9%** since the first sightings in 1998. Additionally, more than half of total UFO sightings have been spotted throughout the **West Coast** Region. So if you're looking to have better chance to catch your own UFO any time soon, stay around the west coast, preferably **California**, or **Washington**, and try to look for an object in the shape of a **triangle**.
+Overall, we were able to see that UFO sightings are increasing in numbers as the years progress. Sightings have grown by **9%** since the first sightings in 1998. Additionally, more than half of total UFO sightings have been spotted throughout the **West Coast** Region. If you're looking to have a better chance to catch your own UFO stay around the west coast, preferably **California** or **Washington**, and try to look for an object in the shape of a **triangle** flying through the sky.
 
 Good luck to all of you UFO hunters!!

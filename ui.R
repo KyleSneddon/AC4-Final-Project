@@ -18,8 +18,7 @@ shinyUI(navbarPage(theme = shinytheme("slate"),'UFO Reporting Analysis',
                             
                             # Map page title
                             titlePanel(  
-                              textOutput("title")
-                              ),
+                              textOutput("title")),
                             
                             # Create side bar with widgets
                             sidebarLayout(
@@ -40,7 +39,7 @@ shinyUI(navbarPage(theme = shinytheme("slate"),'UFO Reporting Analysis',
                    tabPanel('Chart',
                             
                             # Map page title
-                            titlePanel('Proportion of UFO Reports by State, Shape, or Year'),
+                            titlePanel(textOutput("title2")),
                             
                             # Map page side panel widget
                             sidebarLayout(
