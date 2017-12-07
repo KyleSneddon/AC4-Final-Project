@@ -1,4 +1,3 @@
-
 # Load needed libraries
 library('shiny')
 library('dplyr')
@@ -6,19 +5,27 @@ library("lubridate")
 library("stringr")
 library("leaflet")
 
+# Read in data and convert to data frame, formatting data
+ufo.data <- read.csv(file="data/ufo.csv", 
+                     header= TRUE, 
+                     stringsAsFactors = FALSE) %>% 
+                     mutate(Date = mdy(Date)) %>% 
+                     mutate(Years = year(Date)) %>% 
+                     select(City,State,Date,Shape,Longitude,Latitute,Duration,Years)
 
-# Read in data and convert to data frame, formatting data.
-ufo.data <- read.csv(file="data/ufo.csv", header= TRUE, stringsAsFactors = FALSE) %>% mutate(Date = mdy(Date)) %>% mutate(Years = year(Date)) %>% select(City,State,Date,Shape,Longitude,Latitute,Duration,Years)
+# Function for changing empty shape entries into "unknown"
 BlankShape <- function(shape.take){
   if(shape.take == ""){
     return("Unknown")
   }
     return(shape.take)
 }
+
+# Clean up shape information in ufo data frame
 ufo.data$Shape<- lapply(ufo.data$Shape, BlankShape)
 ufo.data$Shape <- as.character(ufo.data$Shape)
 
-
+# Function for cleaning up duration data entries
 ufo.data$Duration <- as.numeric(ufo.data$Duration)
 DurationClean <- function(duration){
   if(is.na(duration)){
@@ -26,10 +33,12 @@ DurationClean <- function(duration){
   }
   return(duration)
 }
+
+# Clean up duration information in ufo data frame
 ufo.data$Duration <- lapply(ufo.data$Duration, DurationClean)
 ufo.data$Duration <- as.numeric(ufo.data$Duration)
 
-
+# Function for adding a time category field to each object
 GetSize <- function(due.time){
   if(due.time <= 60){
     return(5)
@@ -45,9 +54,10 @@ GetSize <- function(due.time){
     return(45)
   }
 }
+
+# Adds a time category field to each object in data frame
 ufo.data$size <- lapply(ufo.data$Duration, GetSize)
 ufo.data$size <- as.numeric(ufo.data$size)
-
 
 # Construct shiny server
 shinyServer(function(input, output) {
@@ -56,7 +66,7 @@ shinyServer(function(input, output) {
     selectInput('shape', 'Shape', choices = c("All"="all",shape.df$Shape), selected = "All")
   })
   
-  
+  # Takes input data from map widgets to filter data frame
   ufo.dataset <- reactive({
     if(input$shape == "all"){
     selected.df <- ufo.data %>% filter(Years == input$years) %>% filter(State == input$state)
@@ -65,9 +75,8 @@ shinyServer(function(input, output) {
     }
     return(selected.df)
   })
-  
-  
 
+  # Generates a map based on user input filters
   output$map <- renderLeaflet({
     map.df <- ufo.dataset()
     factpal <- colorFactor(topo.colors(nrow(ufo.data)), ufo.data$Shape)
@@ -80,14 +89,15 @@ shinyServer(function(input, output) {
                        stroke = FALSE, 
                        fillOpacity = 0.45
                        )
-
   })
   
+  # Generates custom page title depending on user input
   output$title <- renderText(paste("Year",input$years,state.name[grep(input$state, state.abb)],"UFO MAP"))
-
+  
+  # Generates a pie chart
   output$pie <- renderPlotly({
     
-    # Get desired filters through widget inputs
+    # Get desired pie chart filters through widget inputs
     if(input$options == "Duration") {
       pie.df <- mutate(ufo.data, option = State)
     } else if (input$options == "Shape") {
@@ -98,7 +108,7 @@ shinyServer(function(input, output) {
       pie.df <- mutate(ufo.data, option = State)
     }
     
-    # Build the chart with input filters
+    # Build the pie chart chart with input filters
     p <- group_by(pie.df, option) %>%
       summarize(count = n()) %>%
       plot_ly(labels = ~option,
@@ -115,7 +125,6 @@ shinyServer(function(input, output) {
              xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
              yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
   })
-  
 })
   
   

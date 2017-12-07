@@ -4,24 +4,24 @@ library("plotly")
 library("shinythemes")
 
 # Construct shiny UI page
-shinyUI(navbarPage(theme = shinytheme("slate"),'UFO Analysis',
+shinyUI(navbarPage(theme = shinytheme("slate"),'UFO Reporting Analysis',
                    
                    # Create a tab panel for the about page
                    tabPanel('About',
                             
+                            # Inserts markdown page
                             includeMarkdown("about.md")
                    ), 
                    
                    # Create a tab panel for the map page
-                  
-                   
                    tabPanel('Map',
                             
                             # Map page title
                             titlePanel(  
                               textOutput("title")
                               ),
-                            # Map page information goes here
+                            
+                            # Create side bar with widgets
                             sidebarLayout(
                                 sidebarPanel(
                                     selectInput('state', 'State', choices = toupper(state.abb), selected = "WA" ),
@@ -29,21 +29,20 @@ shinyUI(navbarPage(theme = shinytheme("slate"),'UFO Analysis',
                                     uiOutput("myList")
                                 ),
                                 
+                                # Insert map plot into main panel
                                 mainPanel(
                                   leafletOutput("map")
                                 )
                               )
                     ),
-                            
               
                    # Create a tab panel for the plot page
-                   tabPanel('Plot',
-                            align = "center",
+                   tabPanel('Chart',
                             
                             # Map page title
                             titlePanel('Proportion of UFO Reports by State, Shape, or Year'),
                             
-                            # Map page information goes here
+                            # Map page side panel widget
                             sidebarLayout(
                               position = "left",
                               sidebarPanel(
@@ -53,7 +52,7 @@ shinyUI(navbarPage(theme = shinytheme("slate"),'UFO Analysis',
                                             selected = "State")
                               ),
                               
-                              # Map page main panel chart 
+                              # Insert pie chart into main panel
                               mainPanel(
                                 plotlyOutput("pie")
                               )
@@ -61,8 +60,9 @@ shinyUI(navbarPage(theme = shinytheme("slate"),'UFO Analysis',
                    ),
                    
                    # Create a tab panel for the conclusion page
-                   tabPanel('Conclusion',
+                   tabPanel('Findings',
                             
+                            # Insert markdown page
                             includeMarkdown("conclusion.md")
                    )
 ))
