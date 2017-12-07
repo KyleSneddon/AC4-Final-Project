@@ -16,14 +16,26 @@ shinyUI(navbarPage(theme = shinytheme("slate"), 'UFO Analysis',
                             # About page information goes here 
                    ), 
                    
-                   # Create a tab panel for the map page
+                   # Create a tab panel for map page
                    tabPanel('Map',
                             
                             # Map page title
-                            titlePanel('Map Page Title')
-                            
+                            titlePanel(  
+                              textOutput("title")
+                              ),
                             # Map page information goes here
-                   ),
+                            sidebarLayout(
+                                sidebarPanel(
+                                    selectInput('state', 'State', choices = toupper(state.abb), selected = "WA" ),
+                                    sliderInput("years", "Year:", min = 1998, max = 2014, value = 2000),
+                                    uiOutput("myList")
+                                ),
+                                
+                                mainPanel(
+                                  leafletOutput("map")
+                                )
+                              )
+                    ),
                    
                    # Create a tab panel for the plot page
                    tabPanel('Plot',
