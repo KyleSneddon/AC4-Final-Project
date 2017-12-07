@@ -2,10 +2,8 @@
 library("shiny")
 library("plotly")
 library("shinythemes")
-
 # Construct shiny UI page
-shinyUI(navbarPage(theme = shinytheme("slate"), 'UFO Analysis',
-                   # shinythemes::themeSelector(),
+shinyUI(navbarPage(theme = shinytheme("slate"),'UFO Analysis',
                    
                    # Create a tab panel for the about page
                    tabPanel('About',
@@ -16,7 +14,9 @@ shinyUI(navbarPage(theme = shinytheme("slate"), 'UFO Analysis',
                             # About page information goes here 
                    ), 
                    
-                   # Create a tab panel for map page
+                   # Create a tab panel for the map page
+                  
+                   
                    tabPanel('Map',
                             
                             # Map page title
@@ -36,7 +36,8 @@ shinyUI(navbarPage(theme = shinytheme("slate"), 'UFO Analysis',
                                 )
                               )
                     ),
-                   
+                            
+              
                    # Create a tab panel for the plot page
                    tabPanel('Plot',
                             align = "center",
@@ -69,5 +70,4 @@ shinyUI(navbarPage(theme = shinytheme("slate"), 'UFO Analysis',
                             
                             # Conclusion page information goes here
                    )
-      )
-)
+))
