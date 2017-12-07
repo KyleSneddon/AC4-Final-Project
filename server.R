@@ -7,7 +7,7 @@ library("leaflet")
 
 
 # Read in data and convert to data frame, formatting data.
-ufo.data <- read.csv(file="data/ufo.csv", header= TRUE, stringsAsFactors = FALSE) %>% mutate(Date = mdy(Date)) %>% mutate(Years = year(Date)) %>% select(City,State,Date,Shape,Longitude,Latitute,Duration,Years)
+ufo.data <- read.csv(file="data/cleandata.csv", header= TRUE, stringsAsFactors = FALSE) %>% mutate(Date = mdy(Date)) %>% mutate(Years = year(Date)) %>% select(City,State,Date,Shape,Longitude,Latitute,Duration,Years)
 BlankShape <- function(shape.take){
   if(shape.take == ""){
     return("Unknown")
@@ -106,11 +106,13 @@ shinyServer(function(input, output) {
                  textposition = "inside") %>%
          add_pie(hole = 0.5) %>%
          layout(title = "",  
-                 showlegend = F, 
-                 width=800,
-                 height=800,
-                 xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
-                 yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
+                plot_bgcolor='rgb(40, 43, 48)',
+                paper_bgcolor='rgb(40, 43, 48)',
+                showlegend = F, 
+                width=800,
+                height=800,
+                xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+                yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
   })
 
   })

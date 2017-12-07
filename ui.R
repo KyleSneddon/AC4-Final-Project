@@ -2,6 +2,7 @@
 library("shiny")
 library("plotly")
 library("shinythemes")
+library("leaflet")
 
 # Construct shiny UI page
 shinyUI(navbarPage(theme = shinytheme("slate"), 'UFO Analysis',
